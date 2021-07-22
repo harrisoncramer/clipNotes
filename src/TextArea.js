@@ -7,10 +7,17 @@ class TextArea extends Component {
     super(props);
     this.state = {
       textAreaValue: "",
+      url: "", // For displaying...
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClickOne = this.handleClickOne.bind(this);
     this.handleClickTwo = this.handleClickTwo.bind(this);
+  }
+
+  componentDidMount() {
+    getUrl().then(({ url }) => {
+      this.setState((state) => ({ ...state, url }));
+    });
   }
 
   handleChange(event) {
@@ -40,6 +47,7 @@ class TextArea extends Component {
     return (
       <div>
         <StyledH2>clipNotes</StyledH2>
+        <StyledH3>{this.state.url}</StyledH3>
         <StyledTextArea
           value={this.state.textAreaValue}
           onChange={this.handleChange}
@@ -105,6 +113,16 @@ const StyledTextArea = styled.textarea`
   height: 300px;
 `;
 
+const StyledH3 = styled.h3`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: #6e3825;
+  padding-bottom: 0.5em;
+  margin: 0px;
+  color: white;
+`;
+
 const StyledH2 = styled.h1`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -112,6 +130,7 @@ const StyledH2 = styled.h1`
   background-color: #6e3825;
   margin: 0px;
   padding: 0.5em;
+  padding-bottom: 0px;
   color: white;
 `;
 
