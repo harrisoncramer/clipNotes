@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TextArea setNotes={setNotes} notes={notes} />
-        <Notes notes={notes} />
+        {notes.length > 0 && <Notes notes={notes} />}
       </header>
     </div>
   );

@@ -45,7 +45,7 @@ class TextArea extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ position: "relative" }}>
         <StyledH2>clipNotes</StyledH2>
         <StyledH3>{this.state.url}</StyledH3>
         <StyledTextArea
@@ -53,7 +53,9 @@ class TextArea extends Component {
           onChange={this.handleChange}
         />
         <ButtonWrapper>
-          <StyledButton onClick={this.handleClickOne}>Save</StyledButton>
+          <StyledButton className="firstButton" onClick={this.handleClickOne}>
+            Save
+          </StyledButton>
           <StyledButtonAlt onClick={this.handleClickTwo}>Clear</StyledButtonAlt>
         </ButtonWrapper>
       </div>
@@ -62,8 +64,15 @@ class TextArea extends Component {
 }
 
 const ButtonWrapper = styled.div`
+  position: absolute;
+  z-index: 100;
+  margin-top: -30px;
+  margin-left: 110px;
+  .firstButton {
+    margin-right: 0.4em;
+  }
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 `;
 
 const StyledButton = styled.button`
