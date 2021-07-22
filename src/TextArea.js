@@ -120,6 +120,14 @@ const StyledTextArea = styled.textarea`
   background-color: #f8ee98;
   width: 200px;
   height: 300px;
+  border-bottom: none;
+  box-shadow:
+     /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+    /* The second layer */ 0 10px 0 -5px #f8ee98,
+    /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
+    /* The third layer */ 0 20px 0 -10px #f8ee98,
+    /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+  /* Padding for demo purposes */
 `;
 
 const StyledH3 = styled.h3`
