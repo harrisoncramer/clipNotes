@@ -56,10 +56,20 @@ export const saveNote = ({ url, note }) =>
   new Promise(async (resolve, _reject) => {
     chrome.storage.local.get("clipNotes", function (result) {
       // Get the array for the current URL, and push onto it.
-      console.log(result.clipNotes);
       result.clipNotes[url].push(note);
       chrome.storage.local.set({ ...result }, function () {
         console.log("Added a note");
+        resolve();
+      });
+    });
+  });
+
+export const clearNotes = ({ url }) =>
+  new Promise(async (resolve, _reject) => {
+    chrome.storage.local.get("clipNotes", function (result) {
+      // Get the array for the current URL, and push onto it.
+      chrome.storage.local.set({ ...result, [url]: [] }, function () {
+        console.log("Removed notes.");
         resolve();
       });
     });

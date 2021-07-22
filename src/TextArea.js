@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { saveNote, getUrl } from "./util";
+import { saveNote, getUrl, clearNotes } from "./util";
+import styled from "styled-components";
 
 class TextArea extends Component {
   constructor(props) {
@@ -8,14 +9,24 @@ class TextArea extends Component {
       textAreaValue: "",
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickOne = this.handleClickOne.bind(this);
+    this.handleClickTwo = this.handleClickTwo.bind(this);
   }
 
   handleChange(event) {
     this.setState({ textAreaValue: event.target.value });
   }
 
-  handleClick(event) {
+  handleClickTwo(event) {
+    getUrl()
+      .then(({ url }) => clearNotes({ url }))
+      .then(() => {
+        this.props.setNotes([]);
+        this.setState({ textAreaValue: "" });
+      });
+  }
+
+  handleClickOne(event) {
     // Save note to chrome web storage...
     getUrl()
       .then(({ url }) => saveNote({ url, note: this.state.textAreaValue }))
@@ -28,17 +39,80 @@ class TextArea extends Component {
   render() {
     return (
       <div>
-        <label>New Note:</label>
-        <textarea
+        <StyledH2>clipNotes</StyledH2>
+        <StyledTextArea
           value={this.state.textAreaValue}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleClick}>Save</button>
-        <button onClick={this.handleGetNotes}>Get Notes</button>
+        <ButtonWrapper>
+          <StyledButton onClick={this.handleClickOne}>Save</StyledButton>
+          <StyledButtonAlt onClick={this.handleClickTwo}>Clear</StyledButtonAlt>
+        </ButtonWrapper>
       </div>
     );
   }
 }
 
-export default TextArea;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
+const StyledButton = styled.button`
+  --color: lightblue;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    filter: brightness(108%);
+    cursor: pointer;
+  }
+
+  color: black;
+  background: var(--color);
+  border-radius: 3px;
+  border: none;
+  padding: 0.25em 0.85em;
+  font-size: 1.3em;
+`;
+
+const StyledButtonAlt = styled.button`
+  --color: #f39e31;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    filter: brightness(108%);
+    cursor: pointer;
+  }
+
+  color: black;
+  background: var(--color);
+  border-radius: 3px;
+  border: none;
+  padding: 0.25em 0.85em;
+  font-size: 1.3em;
+`;
+
+const StyledTextArea = styled.textarea`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  outline: none;
+  resize: none;
+  padding: 1em;
+  font-size: 1.5em;
+  background-color: #f8ee98;
+  width: 200px;
+  height: 300px;
+`;
+
+const StyledH2 = styled.h1`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: #6e3825;
+  margin: 0px;
+  padding: 0.5em;
+  color: white;
+`;
+
+export default TextArea;
