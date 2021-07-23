@@ -1,5 +1,6 @@
 export const getUrl = () =>
   new Promise((resolve, _reject) => {
+    console.log("Getting current URL...");
     chrome.tabs.query(
       { active: true, windowId: chrome.windows.WINDOW_ID_CURRENT },
       function (tabs) {
@@ -16,12 +17,12 @@ export const getChromeStorageForClipNotes = ({ url }) =>
   new Promise((resolve, _reject) => {
     console.log("Getting chrome storage...");
     chrome.storage.local.get("clipNotes", function (result) {
-      if (!result) {
+      if (!result.clipNotes) {
         // If there is no "clipNotes" object in local storage, then create one...
         const initialState = {};
         chrome.storage.local.set({ clipNotes: initialState }, function () {
           console.log("Set initial storage.");
-          resolve({ url, result: initialState });
+          resolve({ url, result: { clipNotes: {} } });
         });
       } else {
         console.log("Fetched initial storage successfully. State is ", result);
@@ -69,7 +70,7 @@ export const clearNotes = ({ url }) =>
     chrome.storage.local.get("clipNotes", function (result) {
       // Get the array for the current URL, and push onto it.
       chrome.storage.local.set(
-        { clipNotes: { ...result, [url]: [] } },
+        { clipNotes: { ...result.clipNotes, [url]: [] } },
         function () {
           console.log("Removed notes.");
           resolve();

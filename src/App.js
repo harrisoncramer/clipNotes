@@ -16,10 +16,10 @@ import {
 function App() {
   const [notes, setNotes] = useState([]);
   React.useEffect(() => {
-    getUrl()
-      .then(({ url }) => getChromeStorageForClipNotes({ url }))
-      .then(({ url, result }) => setStateOfCurrentUrl({ url, result }))
-      .then(({ url }) => getStateOfCurrentUrl({ url }))
+    getUrl() // Get the URL of the current page.
+      .then(({ url }) => getChromeStorageForClipNotes({ url })) // url = google.com
+      .then(({ url, result }) => setStateOfCurrentUrl({ url, result })) // result ["note 1", "note 2"]
+      .then(({ url }) => getStateOfCurrentUrl({ url })) // ?
       .then(({ data }) => setNotes(data));
   }, []);
 

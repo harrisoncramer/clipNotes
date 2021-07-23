@@ -16,11 +16,21 @@ class TextArea extends Component {
 
   componentDidMount() {
     getUrl().then(({ url }) => {
-      this.setState((state) => ({ ...state, url }));
+      this.setState(function (previousState) {
+        const newState = {
+          ...previousState,
+          url,
+        };
+        return newState;
+      });
     });
   }
 
   handleChange(event) {
+    if (event.target.value.endsWith("\n")) {
+      this.handleClickOne();
+    }
+
     this.setState({ textAreaValue: event.target.value });
   }
 
@@ -46,8 +56,10 @@ class TextArea extends Component {
   render() {
     return (
       <div style={{ position: "relative" }}>
-        <StyledH2>clipNotes</StyledH2>
-        <StyledH3>{this.state.url}</StyledH3>
+        <WrapperDiv>
+          <StyledH2>clipNotes</StyledH2>
+          <StyledH3>{this.state.url}</StyledH3>
+        </WrapperDiv>
         <StyledTextArea
           value={this.state.textAreaValue}
           onChange={this.handleChange}
@@ -134,21 +146,22 @@ const StyledH3 = styled.h3`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  background-color: #6e3825;
   padding-bottom: 0.5em;
   margin: 0px;
   color: white;
 `;
 
 const StyledH2 = styled.h1`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  background-color: #6e3825;
+  font-family: "Rancho";
+  font-size: 2.3em;
   margin: 0px;
   padding: 0.5em;
   padding-bottom: 0px;
   color: white;
+`;
+
+const WrapperDiv = styled.div`
+  background-color: brown;
 `;
 
 export default TextArea;

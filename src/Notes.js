@@ -10,16 +10,22 @@ const Notes = ({ notes }) => {
   );
 };
 
-const StyledNote = styled.p`
+const StyledNote = styled.li`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   font-size: 1.3em;
   color: black;
   text-align: left;
 `;
 
-const StyledNotesWrapper = styled.div`
+const StyledNotesWrapper = styled.ul`
+  width: 100%;
+  margin-top: 2em;
+  padding-right: 0.3em;
+  box-sizing: border-box;
   max-height: 160px;
   overflow: auto;
-  padding: 1em;
 `;
 
 export default Notes;
