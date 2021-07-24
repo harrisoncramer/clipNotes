@@ -24,4 +24,4 @@ To open the extension in your browser, unpack the `dev` folder, like you would w
 
 ## About the authors
 
-The application won first place in Codesmith's "hackathon." It was designed and built by myself and <a href="https://github.com/AlexZayas">@AlexZayas</a> during the junior portion of the program.
+The application won Codesmith's "hackathon," during which residents have about six hours to develop a functional Google Chrome extension. It was designed and built by myself and <a href="https://github.com/AlexZayas">@AlexZayas</a> during the junior portion of the program.
