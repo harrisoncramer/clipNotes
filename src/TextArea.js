@@ -101,7 +101,6 @@ const StyledButton = styled.button`
   border-radius: 3px;
   border: none;
   padding: 0.25em 0.85em;
-  font-size: 1.3em;
 `;
 
 const StyledButtonAlt = styled.button`
@@ -118,7 +117,6 @@ const StyledButtonAlt = styled.button`
   border-radius: 3px;
   border: none;
   padding: 0.25em 0.85em;
-  font-size: 1.3em;
 `;
 
 const StyledTextArea = styled.textarea`
@@ -128,7 +126,6 @@ const StyledTextArea = styled.textarea`
   outline: none;
   resize: none;
   padding: 1em;
-  font-size: 1.5em;
   background-color: #f8ee98;
   width: 200px;
   height: 300px;
@@ -153,7 +150,6 @@ const StyledH3 = styled.h3`
 
 const StyledH2 = styled.h1`
   font-family: "Rancho";
-  font-size: 2.3em;
   margin: 0px;
   padding: 0.5em;
   padding-bottom: 0px;

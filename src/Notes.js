@@ -14,7 +14,6 @@ const StyledNote = styled.li`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  font-size: 1.3em;
   color: black;
   text-align: left;
 `;
