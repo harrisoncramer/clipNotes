@@ -45,6 +45,7 @@ class TextArea extends Component {
 
   handleClickOne(event) {
     // Save note to chrome web storage...
+    if (this.state.textAreaValue === "") return;
     getUrl()
       .then(({ url }) => saveNote({ url, note: this.state.textAreaValue }))
       .then(() => {
