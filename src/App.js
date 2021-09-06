@@ -1,25 +1,29 @@
-// First we didn't realize that there was a different console for the extension and for the main page
-// We also didn't realize that the extensino can't modify localStorage (switch to the chrome storage)
-// Pushing everything into the array—difficult to access the property of the object that we need to modify.
-
-import React, { useState } from "react";
-import "./App.css";
-import TextArea from "./TextArea.js";
-import Notes from "./Notes";
+import React, { useState } from 'react';
+import './App.css';
+import TextArea from './TextArea.js';
+import Notes from './Notes';
 import {
   getUrl,
   getChromeStorageForClipNotes,
   setStateOfCurrentUrl,
   getStateOfCurrentUrl,
-} from "./util";
+} from './util';
 
 function App() {
   const [notes, setNotes] = useState([]);
+
+  /* On initial page load...
+   * 1. Get the chrome storage.
+   * 2. If there are no notes for the current url, then set an empty array.
+   * 3. Get the data just set/not set for the current url.
+   * 4. Take the data at the current URL and set it inside the state of the applications.
+   * Those notes are then passed down to the TextArea and Notes components to be rendered to the page.
+   */
   React.useEffect(() => {
-    getUrl() // Get the URL of the current page.
-      .then(({ url }) => getChromeStorageForClipNotes({ url })) // url = google.com
-      .then(({ url, result }) => setStateOfCurrentUrl({ url, result })) // result ["note 1", "note 2"]
-      .then(({ url }) => getStateOfCurrentUrl({ url })) // ?
+    getUrl()
+      .then(({ url }) => getChromeStorageForClipNotes({ url }))
+      .then(({ url, result }) => setStateOfCurrentUrl({ url, result }))
+      .then(({ url }) => getStateOfCurrentUrl({ url }))
       .then(({ data }) => setNotes(data));
   }, []);
 
